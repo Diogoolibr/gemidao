@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toca ao tocar</title>
+    <title>Você foi selecionado!</title>
     <style>
         html, body {
             margin: 0;
@@ -16,28 +16,53 @@
             align-items: center;
             color: white;
             font-family: sans-serif;
-            font-size: 2rem;
             text-align: center;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #playBtn {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        #playBtn:hover {
+            background-color: #666;
         }
     </style>
 </head>
 <body>
     <audio id="audio" src="gemidane-do-zape-2.mp3" type="audio/mp3"></audio>
-    <div>Clique ou toque em qualquer lugar da tela para tocar o som</div>
+    
+    <div id="container">
+        <div>🎁 Parabéns! Você foi selecionado para um sorteio exclusivo!</div>
+        <button id="playBtn">Clique aqui para confirmar sua participação</button>
+    </div>
 
     <script>
         const audio = document.getElementById('audio');
+        const btn = document.getElementById('playBtn');
+
+        audio.volume = 1.0; // Volume máximo
 
         function tocarAudio() {
             audio.play();
-            // Remove o evento depois de tocar uma vez (opcional)
-          //  document.removeEventListener('click', tocarAudio);
-          //  document.removeEventListener('touchstart', tocarAudio);
+            btn.disabled = true;
+            btn.innerText = "Participação confirmada!";
         }
 
-        // Adiciona suporte tanto pra desktop (click) quanto mobile (touch)
-        document.addEventListener('click', tocarAudio);
-        document.addEventListener('touchstart', tocarAudio);
+        btn.addEventListener('click', tocarAudio);
     </script>
 </body>
 </html>
